@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "tech-track"
+version = "0.1.0"
+description = "TechTrack develops a platform for monitoring and managing technical equipment such as industrial robots, manufacturing equipment, quality control systems, etc."
+authors = ["Altynai"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+Django = "^5.0.6"
+psycopg2-binary = "^2.9.9"
+python-dotenv = "^1.0.1"
+dj-database-url = "^2.1.0"
+django-redis = "^5.4.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
