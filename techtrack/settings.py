@@ -13,6 +13,8 @@ DEBUG = os.getenv('DEBUG')
 ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
+    'rest_framework',
+    'jazzmin',
     'monitoring',
     'django.contrib.admin',
     'django.contrib.auth',

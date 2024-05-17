@@ -65,5 +65,5 @@ class Alert(models.Model):
         ]
 
     def __str__(self):
-        return f"Alert for {self.equipment} ({self.severity}) at {self.timestamp}: {this.description}"
+        return f"Alert for {self.equipment} ({self.severity}) at {self.timestamp}: {self.description}"
 
