@@ -10,6 +10,15 @@ class EquipmentType(models.Model):
 
 
 class Equipment(models.Model):
+    IN_USE = 'IN_USE'
+    DISABLED = 'DISABLED'
+    IN_REPAIR = 'IN_REPAIR'
+
+    STATUS_CHOICES = (
+        (IN_USE, 'In Use'),
+        (DISABLED, 'Disabled'),
+        (IN_REPAIR, 'In Repair')
+    )
 
     name = models.CharField(max_length=100)
     serial_number = models.CharField(max_length=100)
@@ -17,7 +26,7 @@ class Equipment(models.Model):
     equipment_type = models.ForeignKey(EquipmentType, on_delete=models.CASCADE)
     manufacturer = models.CharField(max_length=100)
 
-    status = models.CharField(max_length=50)
+    status = models.CharField(max_length=50, choices=STATUS_CHOICES)
 
     installed_at = models.DateTimeField(auto_now_add=True)
     last_maintained_at = models.DateTimeField(auto_now=True)
