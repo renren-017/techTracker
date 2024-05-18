@@ -1,5 +1,7 @@
 from django.db import models
 
+from users.models import User
+
 
 class EquipmentType(models.Model):
     name = models.CharField(max_length=100)
@@ -76,3 +78,25 @@ class Alert(models.Model):
     def __str__(self):
         return f"Alert for {self.equipment} ({self.severity}) at {self.timestamp}: {self.description}"
 
+
+class MaintenanceRecord(models.Model):
+    INSPECTION = 'INSPECTION'
+    REPAIR = 'REPAIR'
+    MINOR_SYSTEM_UPDATE = 'MINOR_SYSTEM_UPDATE'
+    MAJOR_SYSTEM_UPDATE = 'MAJOR_SYSTEM_UPDATE'
+
+    MAINTENANCE_CHOICES = (
+        (INSPECTION, 'Inspection'),
+        (REPAIR, 'Repair'),
+        (MINOR_SYSTEM_UPDATE, 'Minor System Update'),
+        (MAJOR_SYSTEM_UPDATE, 'Major System Update')
+    )
+
+    equipment = models.ForeignKey(Equipment, on_delete=models.CASCADE, related_name='maintenance_records')
+    date_performed = models.DateTimeField()
+    technician = models.ForeignKey(User, on_delete=models.CASCADE, related_name='maintenance_records')
+    maintenance_type = models.CharField(max_length=100, choices=MAINTENANCE_CHOICES)
+    notes = models.TextField()
+
+    def __str__(self):
+        return f"Maintenance {self.maintenance_type} on {self.date_performed.strftime('%Y-%m-%d')}"

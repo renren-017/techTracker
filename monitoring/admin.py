@@ -1,5 +1,5 @@
 from django.contrib import admin
-from monitoring.models import Equipment, EquipmentType, Data, Alert
+from monitoring.models import Equipment, EquipmentType, Data, Alert, MaintenanceRecord
 
 
 @admin.register(EquipmentType)
@@ -33,3 +33,9 @@ class AlertAdmin(admin.ModelAdmin):
     search_fields = ('description',)
     date_hierarchy = 'timestamp'
     ordering = ('-timestamp',)
+
+
+@admin.register(MaintenanceRecord)
+class MaintenanceRecordAdmin(admin.ModelAdmin):
+    list_display = ['equipment', 'date_performed', 'technician', 'maintenance_type']
+    list_filter = ['equipment', 'maintenance_type', 'date_performed', 'technician']
